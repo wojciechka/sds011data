@@ -20,7 +20,7 @@ go install github.com/wojciechka/sds011data/cmd/sds011-influxdb-writer
 ```bash
 $ sds011-reader \
   -device /dev/ttyUSB0 \
-	-dataDirectory /path/to/datadir
+  -dataDirectory /path/to/datadir
 ```
 
 The command above will write data to specified directory, using the file format described below.
@@ -32,7 +32,7 @@ The directory `/path/to/datadir` must already exist.
 ```bash
 $ sds011-influxdb-writer \
   -dataDirectory /path/to/datadir \
-	-stateFile /path/to/datadir/.writer-state \
+  -stateFile /path/to/datadir/.writer-state \
   -influxToken "(token)" \
   -influxOrg "(org)" \
   -influxBucket "(bucket)" \
