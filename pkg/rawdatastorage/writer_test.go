@@ -33,7 +33,7 @@ func TestWriteData(t *testing.T) {
 		t.Errorf("File %s not found or could not be checked: %v", when.Format("20060102"), err)
 	}
 
-	if info.Size() != (13 * 3600 * 4 + 4) {
+	if info.Size() != (13*3600*4 + 4) {
 		t.Errorf("Invalid size for timestamp file: %v", info.Size())
 	}
 

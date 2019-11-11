@@ -60,6 +60,7 @@ func (p *sds011GroupDataParser) ReadData() (*DataValues, error) {
 				}
 			}
 			p.position = newPosition
+			return result, nil
 		}
 		return result, errors.Trace(err)
 	}

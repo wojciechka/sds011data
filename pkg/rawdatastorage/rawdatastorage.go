@@ -2,6 +2,7 @@ package rawdatastorage
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"path"
 	"time"
@@ -40,6 +41,9 @@ func (w *RawdataStorage) ensureFileOpen(filename string) error {
 
 		o, err := f.Seek(0, os.SEEK_END)
 		if err != nil {
+			if err == io.EOF {
+				return err
+			}
 			return errors.Trace(err)
 		}
 
@@ -65,6 +69,9 @@ func (w *RawdataStorage) seekToTime(when time.Time, extend bool) (int64, error) 
 		o, err := w.currentFile.Seek(0, os.SEEK_END)
 		if err != nil {
 			w.closeCurrentFile()
+			if err == io.EOF {
+				return 0, err
+			}
 			return 0, errors.Trace(err)
 		}
 
@@ -85,6 +92,9 @@ func (w *RawdataStorage) seekToTime(when time.Time, extend bool) (int64, error) 
 		o, err = w.currentFile.Seek(offset, os.SEEK_SET)
 		if err != nil {
 			w.closeCurrentFile()
+			if err == io.EOF {
+				return 0, err
+			}
 			return 0, errors.Trace(err)
 		}
 	}

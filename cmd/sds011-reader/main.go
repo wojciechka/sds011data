@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/wojciechka/pm25data/pkg/rawdatastorage"
 	"github.com/wojciechka/pm25data/pkg/sds011"
-	"github.com/wojciechka/pm25data/pkg/rawdatastorage"	
 )
 
 var (
 	dataDirectory = flag.String("dataDirectory", ".", "directory to store data in")
-	device = flag.String("device", "/dev/ttyUSB0", "device to use for reading data")
-	test = flag.Bool("test", false, "enable test mode that uses fake sensor data")
+	device        = flag.String("device", "/dev/ttyUSB0", "device to use for reading data")
+	test          = flag.Bool("test", false, "enable test mode that uses fake sensor data")
 )
 
 func errorOut(err error) {
