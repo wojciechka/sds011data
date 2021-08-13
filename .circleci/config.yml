@@ -1,0 +1,20 @@
+version: '2.1'
+
+workflows:
+  version: 2
+
+  build:
+    jobs:
+      - build
+
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.16
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: 'Build source code'
+          command: 'go build ./...'
+
