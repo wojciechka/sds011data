@@ -1,11 +1,21 @@
-version: '2.1'
+version: "2.1"
 
 workflows:
   version: 2
 
   build:
+    when:
+      not:
+        equal: [scheduled_pipeline, << pipeline.trigger_source >>]
     jobs:
       - build
+  scheduled-test:
+    when:
+      and:
+        - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+        - equal: [ "scheduled-test", << pipeline.schedule.name >> ]
+    jobs:
+      - test
 
 jobs:
   build:
@@ -15,6 +25,15 @@ jobs:
     steps:
       - checkout
       - run:
-          name: 'Build source code'
-          command: 'go build ./...'
+          name: "Build source code"
+          command: "go build ./..."
 
+  test:
+    docker:
+      - image: cimg/go:1.16
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: "Test source code"
+          command: "go test ./..."
