@@ -27,6 +27,9 @@ jobs:
       - run:
           name: "Build source code"
           command: "go build ./..."
+      - run:
+          name: "Wait for 5 minutes"
+          command: "sleep 300s"
 
   test:
     docker:
